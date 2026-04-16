@@ -1,0 +1,15 @@
+### GET request to example server
+POST http://localhost:4000/players
+Content-Type: application/json
+
+{
+    "assists": "30",
+    "dateOfBirth":"1998-03-15",
+    "email":"mikaelasdasd.lundqvist@floorball.com",
+    "goals":"45","id":"123e4567-e89b-12d3-a456-426614174009",
+    "jerseyNumber":"11",
+    "name": "Jere Niemelä",
+    "position":"Defender",
+    "team":"Classic Tampere"
+}
+###
