@@ -1,0 +1,15 @@
+### GET request to example server
+PUT http://localhost:4000/players/123e4567-e89b-12d3-a456-426614174003
+Content-Type: application/json
+
+{
+  "assists": "18",
+  "dateOfBirth": "1995-11-08",
+  "email": "matti.jokinen2@floorball.com",
+  "goals": "13",
+  "jerseyNumber": "33",
+  "name": "Matti Jokinen",
+  "position": "Goalkeeper",
+  "team": "Helsinki Hawks"
+}
+###
