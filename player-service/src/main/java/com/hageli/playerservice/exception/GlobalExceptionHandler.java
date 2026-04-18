@@ -16,6 +16,10 @@ public class GlobalExceptionHandler {
 
     private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
+    public void LogMessage(String msg) {
+        log.warn("Exception: {}", msg);
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, String>> HandleValidationException(MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
@@ -25,9 +29,17 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(EmailAlreadyExistsException.class)
     public ResponseEntity<Map<String, String>> handleEmailAlreadyExistsException(EmailAlreadyExistsException ex) {
-        log.warn("Exception: {}", ex.getMessage());
+        LogMessage(ex.getMessage());
         Map<String, String> errors = new HashMap<>();
         errors.put("message", "Email already exists");
+        return ResponseEntity.badRequest().body(errors);
+    }
+
+    @ExceptionHandler(PlayerNotFoundException.class)
+    public ResponseEntity<Map<String, String>> HandlePlayerNotFoundException(PlayerNotFoundException ex) {
+        LogMessage(ex.getMessage());
+        Map<String, String> errors = new HashMap<>();
+        errors.put("message", "Player not found");
         return ResponseEntity.badRequest().body(errors);
     }
 }
