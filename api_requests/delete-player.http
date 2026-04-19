@@ -1,4 +1,4 @@
 ### GET request to example server
-DELETE http://localhost:4000/players/123e4567-e89b-12d3-a456-426614174003
+DELETE http://localhost:4000/players/1edf7c88-917c-4a12-976d-98b1925da24d
 
 ###
