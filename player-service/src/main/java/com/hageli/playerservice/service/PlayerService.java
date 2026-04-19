@@ -4,6 +4,8 @@ import com.hageli.playerservice.dto.PlayerRequestDTO;
 import com.hageli.playerservice.dto.PlayerResponseDTO;
 import com.hageli.playerservice.exception.EmailAlreadyExistsException;
 import com.hageli.playerservice.exception.PlayerNotFoundException;
+import com.hageli.playerservice.grpc.BillingServiceGrpcClient;
+import com.hageli.playerservice.kafka.KafkaProducer;
 import com.hageli.playerservice.mapper.PlayerMapper;
 import com.hageli.playerservice.model.Player;
 import com.hageli.playerservice.repository.PlayerRepository;
@@ -15,10 +17,15 @@ import java.util.UUID;
 
 @Service
 public class PlayerService {
-    private PlayerRepository playerRepository;
+    private final PlayerRepository playerRepository;
+    private final BillingServiceGrpcClient billingServiceGrpcClient;
+    private final KafkaProducer kafkaProducer;
 
-    public PlayerService(PlayerRepository playerRepository) {
+
+    public PlayerService(PlayerRepository playerRepository, BillingServiceGrpcClient billingServiceGrpcClient, KafkaProducer kafkaProducer) {
         this.playerRepository = playerRepository;
+        this.billingServiceGrpcClient = billingServiceGrpcClient;
+        this.kafkaProducer = kafkaProducer;
     }
 
     public List<PlayerResponseDTO> getPlayers() {
@@ -31,6 +38,9 @@ public class PlayerService {
             throw new EmailAlreadyExistsException("Email already in use");
         }
         Player newPlayer = playerRepository.save(PlayerMapper.toModel(playerRequestDTO));
+        billingServiceGrpcClient.createBillingAccount(newPlayer.getId().toString(), newPlayer.getName(), newPlayer.getEmail());
+        kafkaProducer.sendEvent(newPlayer);
+
         return PlayerMapper.toDTO(newPlayer);
     }
 
