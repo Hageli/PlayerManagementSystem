@@ -1,0 +1,7 @@
+com\hageli\analyticsservice\kafka\KafkaConsumer.class
+player\events\PlayerEvent$Builder.class
+player\events\PlayerEvent$1.class
+player\events\PlayerEventOuterClass.class
+player\events\PlayerEvent.class
+com\hageli\analyticsservice\AnalyticsServiceApplication.class
+player\events\PlayerEventOrBuilder.class
