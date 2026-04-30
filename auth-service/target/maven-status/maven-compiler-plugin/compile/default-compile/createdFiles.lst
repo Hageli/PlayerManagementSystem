@@ -1,0 +1,10 @@
+com\hageli\authservice\dto\LoginResponseDTO.class
+com\hageli\authservice\controller\AuthController.class
+com\hageli\authservice\dto\LoginRequestDTO.class
+com\hageli\authservice\repository\UserRepository.class
+com\hageli\authservice\AuthServiceApplication.class
+com\hageli\authservice\util\JwtUtil.class
+com\hageli\authservice\service\UserService.class
+com\hageli\authservice\config\SecurityConfig.class
+com\hageli\authservice\model\User.class
+com\hageli\authservice\service\AuthService.class
